@@ -1,0 +1,23 @@
+FlashCards
+
+npx create-expo-app flashcards-native
+npm run android
+
+BBDD persistente -> Firebase
+                    Creamos un nuevo proyecto
+                    Cuenta google
+                    Autenticacion
+                        Comenzar
+                        Correo/contraseña
+                    CloudFirestore
+                        Crear BBDD
+                            Modo de prueba (Europa)
+                    Vamos a home -> a la web
+                        Registramos un nombre aleatorio
+
+                    Vamos a nuestra consola y al terminal:
+                        npm install firebase
+                    
+                    Creamos src/api/db.js
+                        Pegamos el codigo de la web de firebase
+
