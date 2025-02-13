@@ -1,23 +1,25 @@
-// Import the functions you need from the SDKs you need
+// Importa solo lo necesario de la versión modular
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth } from "firebase/auth";
+import { getFirestore, collection } from 'firebase/firestore';
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Tus credenciales de firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyBGaUjFhI0p5QCzeugJBGQG4_IKl0W7fCQ",
-  authDomain: "flashcardsnative-de6b8.firebaseapp.com",
-  projectId: "flashcardsnative-de6b8",
-  storageBucket: "flashcardsnative-de6b8.firebasestorage.app",
-  messagingSenderId: "440721932897",
-  appId: "1:440721932897:web:b4209e7ac582c7fe0de020",
-  measurementId: "G-ZX2NZF2JEE"
+  apiKey: "AIzaSyDTczHPjrfbx6PTzbTGKbG_Y_fL6E5Lt9c",
+  authDomain: "flashcards-c5d50.firebaseapp.com",
+  projectId: "flashcards-c5d50",
+  storageBucket: "flashcards-c5d50.firebasestorage.app",
+  messagingSenderId: "979071675404",
+  appId: "1:979071675404:web:75a0c0fda4f72efc9bd229"
 };
 
-// Initialize Firebase
-export const app = firebase.initializeApp(firebaseConfig); // inicializa la app de firebase
-export const analytics = getAnalytics(app); // inicializa el analytics de firebase
-export const db = firebase.firestore(app); // inicializa la base de datos de firebase
-export const auth = getAuth(app); // inicializa la autenticación de firebase
+// Inicializa Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+// Accede a las colecciones usando el método modular
+export const categoriesRef  = collection(db, 'categories');
+export const cardsRef  = collection(db, 'cards');
+
+export { db, auth };

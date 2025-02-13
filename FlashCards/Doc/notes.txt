@@ -21,3 +21,9 @@ BBDD persistente -> Firebase
                     Creamos src/api/db.js
                         Pegamos el codigo de la web de firebase
 
+Debes de instalar para las promesas -> npm install await-to-js
+
+Importante: errores de navigation en rutas...
+el problema se soluciona con tree o eliminando etiqueta containerNvigation
+Causa: expo ya añade un navegador de serie, es por eso
+

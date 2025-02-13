@@ -1,8 +1,11 @@
-import React from 'react';
-import {  StatusBar, StyleSheet, Text, View } from 'react-native';
-import Navigation from '../src/Wrappers/Navigation';
+import { AuthContextWrapper } from '@/src/Wrappers/AuthContext';
+import Navigation from '@/src/Wrappers/Navigation';
+
 
 export default function App() {
-  return <Navigation></Navigation>;
+  return (
+    <AuthContextWrapper>
+      <Navigation />
+    </AuthContextWrapper>
+  );
 }
-

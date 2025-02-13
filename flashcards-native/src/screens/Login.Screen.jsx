@@ -1,6 +1,6 @@
 import { Button } from '@rneui/base';
 import to from 'await-to-js';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useCallback, useState, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { auth } from '../api/db';
@@ -11,7 +11,7 @@ import { useUser } from '../hooks/auth';
 
 const styles = StyleSheet.create({
   outer: {
-    backgroundColor: COLORS.main,
+    backgroundColor: COLORS.highlight,
     padding: 36,
     height: '100%',
   },
@@ -57,10 +57,9 @@ const styles = StyleSheet.create({
 const baseState = () => ({
   email: '',
   password: '',
-  passwordConfirmation: '',
 });
 
-function SignUp({ navigation }) {
+function Login({ navigation }) {
   const [user, setUser] = useUser();
   const [form, setForm] = useState(baseState());
 
@@ -71,13 +70,13 @@ function SignUp({ navigation }) {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
-  const doSignUp = useCallback(async () => {
-    const [signUpError, userCredentials] = await to(
-      createUserWithEmailAndPassword(auth, form.email, form.password)
+  const doLogin = useCallback(async () => {
+    const [loginError, userCredentials] = await to(
+      signInWithEmailAndPassword(auth, form.email, form.password)
     );
 
-    if (signUpError) {
-      const { code } = signUpError;
+    if (loginError) {
+      const { code } = loginError;
       setError(MESSAGES[code] || code);
     } else {
       setForm(baseState());
@@ -92,16 +91,14 @@ function SignUp({ navigation }) {
   }, [navigation, user]);
 
   useEffect(() => {
-    const { email, password, passwordConfirmation } = form;
+    const { email, password } = form;
 
     setValid(() => {
-      if (!email.length || !password.length || !passwordConfirmation.length) {
+      if (!email.length || !password.length) {
         return false;
       }
 
       if (password.length < 6) return false;
-
-      if (password !== passwordConfirmation) return false;
 
       return true;
     });
@@ -111,12 +108,12 @@ function SignUp({ navigation }) {
     setError(null);
   }, [form, setError]);
 
-  const { email, password, passwordConfirmation } = form;
+  const { email, password } = form;
 
   return (
     <View style={styles.outer}>
       <View style={styles.inner}>
-        <Text style={styles.title}>Sign Up</Text>
+        <Text style={styles.title}>Welcome{'\n'}Back</Text>
 
         <View style={styles.inputContainer}>
           <TextInput
@@ -134,22 +131,12 @@ function SignUp({ navigation }) {
             secureTextEntry
             onChangeText={(value) => handleChange({ key: 'password', value })}
           />
-          <TextInput
-            style={styles.input}
-            placeholder="Confirm Password"
-            value={passwordConfirmation}
-            textContentType="password"
-            secureTextEntry
-            onChangeText={(value) =>
-              handleChange({ key: 'passwordConfirmation', value })
-            }
-          />
 
           <Button
             titleStyle={FONT.button}
             buttonStyle={styles.button}
-            title="Sign Up"
-            onPress={doSignUp}
+            title="Login"
+            onPress={doLogin}
             disabled={!valid}
           />
         </View>
@@ -159,12 +146,12 @@ function SignUp({ navigation }) {
         <Button
           buttonStyle={styles.link.button}
           titleStyle={styles.link.title}
-          title="Login instead"
-          onPress={() => navigation.navigate(ROUTES.login)}
+          title="Sign up instead"
+          onPress={() => navigation.navigate(ROUTES.signup)}
         />
       </View>
     </View>
   );
 }
 
-export default SignUp;
+export default Login;
