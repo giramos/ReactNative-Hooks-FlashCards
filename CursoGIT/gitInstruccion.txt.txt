@@ -1,0 +1,63 @@
+- git status: informacion sobre nuestro directorio de trabajo
+- git status -s: info
+- git add . : añade los archivos creador (No usar preferiblemente)
+- git add 'nombreArchivo.txt' : añade el archivos
+- git config: para configurar credeenciales
+- git commit -m : commit con un mensaje
+- git commit -a: commit 'force'
+- git restore "nombreArchivo": recupera un archivo que hemos eliminado a local
+- git checkout "nombreArchivo": vuelve atras, al estado del archivo anterior, a la ultima vez que hiciste commit
+- git reset
+- git show "nombreArchivo" : nos muestra el archivo
+- git log: muestra ID commits
+- git diff IDcommit: muestra la historia de ese commit
+- git log --oneline: muesta mas cortamente los commits ID
+- HEAD : es donde esta apuntando nuestro proyecto
+- git branch: te enseña las ramas de tu proyecto
+- git branch 'nombre': crea una nueva rama
+- git checkout 'nombrerama': se mueve a la rama 
+- git switch nombrerama: se mueve a la rama
+- git branch -d nombreRama: borra la rama
+- git branch -m otra coca: modifica el nombre de la rama origen a nuevoNombre
+- git log --oneline --all
+- git reflog: historial de commits
+
+----- Fusionar ramas ----
+Hay que estar en la rama que quieres fusionar...
+- git merge LaRamaQueQuieresFusionar: integra en la rama master por ejemplo los cambios de la rama donde has hechos los cambios
+					Nuevo cambios
+
+Cuando fusionas algo mal
+- git reset --hard el id del commit ultimo
+
+Cuando existe conflictos entre ramas
+	Rama1 1 2 6  
+	Rama2     3 
+
+- git switch -c conflict-branch
+
+* NOTA: en VScode hay 'Resolve en Merge Editor'=>
+	Rama Incoming (la que esta llegando, la nueva con un nuevo commit)   		vs		Rama actual(current) => con un commit nuevo (puede ser)
+						Rama sin fusion (antes del commit nuevo de ambas ramas de arriba)
+
+
+--- GIT PULL: Coge los cambios y los fusiona
+
+- git pull: actualizar los cambios en nuestro repo. Agarra cambios a nuestro repo
+- git pull origin master
+
+--- GIT FETCH: Coge los cambio sin fusionarlos
+
+- git fecth
+
+
+--- GIT PULL REQUEST: hice una copia de tu repo, lo mejore y quiero actualizar tu repo con mis modificaciones
+Alguien sube un repo
+Otro copia ese repo
+Ese otro lo modifica
+Ese otro quiere contribuir al repo original para actualizar mediante una fusion
+
+
+
+
+
